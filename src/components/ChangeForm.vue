@@ -1,31 +1,42 @@
 <template>
   <form action="#">
-    <CurrentPassword class="input-block"/>
-    <NewPassword class="input-block" ph="New password"/>
-    <ConfirmPassword class="input-block" ph="Repeat new password"/>
+    <div class="input-block">
+      <input type="password" placeholder="Current password" v-model="oldPassword" class="input-password">
+      <Icons/>
+      <!-- <CloseEyes @click="showPassword = !showPassword" :class="{ active: showPassword }"/>
+      <OpenEyes @click="showPassword = false" :class="{ active: !showPassword }"/> -->
+    </div>
+    <div class="input-block">
+      <input type="password" placeholder="New password" v-model="newPassword" class="input-password new-password">
+      <Icons/>
+    </div>
+    <div class="input-block">
+      <input type="password" placeholder="Repeat new password" v-model="confirmPassword" class="input-password new-password">
+      <!-- <CloseEyes ref="closeEyes"/> -->
+      <Icons/>
+    </div>
     <CustomButton  msg="Change Password"/>
   </form>
 </template>
 
 <script>
-import CurrentPassword from '@/components/ChangeForm/CurrentPassword.vue'
-import NewPassword from '@/components/ChangeForm/NewPassword.vue'
-import ConfirmPassword from '@/components/ChangeForm/ConfirmPassword.vue'
+import Icons from '@/components/ChangeForm/SvgIcons/Icons.vue'
 import CustomButton from '@/components/ChangeForm/CustomButton.vue'
 
 export default {
   name: 'ChangeForm',
   components: {
-    CurrentPassword,
-    NewPassword,
-    ConfirmPassword,
-    CustomButton
+    CustomButton,
+    Icons
   },
   data () {
     return {
       currentPassword: '',
       newPassword: '',
-      confirmNewPassword: ''
+      confirmNewPassword: '',
+      showPassword: false,
+      showCloseEyes: true,
+      showOpenEyes: false
     }
   },
   methods: {
@@ -34,17 +45,25 @@ export default {
         alert('Passwords do not match')
         return
       }
-
       // Here you would typically send an AJAX request to the server to change the password
       // using the currentPassword and newPassword values
-
       alert('Password successfully changed')
       this.currentPassword = ''
       this.newPassword = ''
       this.confirmNewPassword = ''
+    },
+    toggleEyes () {
+      this.showCloseEyes = !this.showCloseEyes
+      this.showOpenEyes = !this.showOpenEyes
+    }
+  },
+  computed: {
+    inputType () {
+      return this.showPassword ? 'text' : 'password'
     }
   }
 }
+
 </script>
 
 <style scoped lang="scss">
@@ -68,7 +87,7 @@ form {
 </style>
 
 <style lang="scss">
-.input-password{
+.input-password {
   position: absolute;
   left: 0;
   bottom: 0.4rem;
