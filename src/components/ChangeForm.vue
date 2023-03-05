@@ -1,33 +1,28 @@
 <template>
   <form action="#">
     <div class="input-block">
-      <input type="password" placeholder="Current password" v-model="oldPassword" class="input-password">
-      <Icons/>
-      <!-- <CloseEyes @click="showPassword = !showPassword" :class="{ active: showPassword }"/>
-      <OpenEyes @click="showPassword = false" :class="{ active: !showPassword }"/> -->
+      <InputPassword ph="Current password" vm="oldPassword"/>
     </div>
     <div class="input-block">
-      <input type="password" placeholder="New password" v-model="newPassword" class="input-password new-password">
-      <Icons/>
+      <InputPassword ph="New password" vm="newPassword"/>
     </div>
     <div class="input-block">
-      <input type="password" placeholder="Repeat new password" v-model="confirmPassword" class="input-password new-password">
       <!-- <CloseEyes ref="closeEyes"/> -->
-      <Icons/>
+      <InputPassword ph="Repeat new password" vm="confirmPassword" />
     </div>
     <CustomButton  msg="Change Password"/>
   </form>
 </template>
 
 <script>
-import Icons from '@/components/ChangeForm/SvgIcons/Icons.vue'
+import InputPassword from '@/components/ChangeForm/InputPassword.vue'
 import CustomButton from '@/components/ChangeForm/CustomButton.vue'
 
 export default {
   name: 'ChangeForm',
   components: {
     CustomButton,
-    Icons
+    InputPassword
   },
   data () {
     return {
@@ -83,17 +78,5 @@ form {
     width: 45%;
     height: 3rem;
   }
-}
-</style>
-
-<style lang="scss">
-.input-password {
-  position: absolute;
-  left: 0;
-  bottom: 0.4rem;
-  text-align: left;
-  display: block;
-  width: 100%;
-  background-color: rgb(255, 255, 255);
 }
 </style>
