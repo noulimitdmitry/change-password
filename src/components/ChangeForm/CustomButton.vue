@@ -1,8 +1,10 @@
 <template>
-  <button type="submit" class="button">{{msg}}</button>
+  <button type="submit" class="button" @click="changePassword">{{msg}}</button>
 </template>
 
 <script>
+// import axios from 'axios'
+
 export default {
   name: 'CustomButton',
   props: {
@@ -11,11 +13,18 @@ export default {
       required: true
     },
     msg: String
-  },
-  methods: {
-    onClick () {
-    }
   }
+  // methods: {
+  //   changePassword () {
+  //    axios.post('/api/change-password')
+  //         .then(response => {
+  //           // дії, що виконуються після успішного запиту
+  //         })
+  //         .catch(error => {
+  //           // дії, що виконуються в разі помилки запиту
+  //         })
+  //   }
+  // }
 }
 </script>
 
